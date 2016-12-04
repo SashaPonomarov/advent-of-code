@@ -1,6 +1,5 @@
 let input = require('./input.js')
-let lines = input.split(`
-`)
+let lines = input.split('\n')
 let rooms = lines.map(line => {
     return line.match(/((?:[a-z]+\-)+)(\d+)\[([a-z]+)\]/).slice(1)
 })
@@ -12,10 +11,9 @@ rooms.forEach(room => {
         return counts
     },{})
     let sorted = Object.keys(counts).sort((a,b) => {
-        return (counts[a] - counts[b]) || ((a>b) ? -1 : 1) 
+        return (counts[b] - counts[a]) || ((a>b) ? 1 : -1) 
     })
-    let checksum = sorted.reverse().join('').slice(0,5)
-    if (checksum === room[2]) {
+    if (sorted.join('').slice(0,5) === room[2]) {
         codes.push(room[1])
     }
 })
